@@ -38,4 +38,9 @@ public class UserDaoImpl implements UserDao {
     public List<User> userList() {
         return (List<User>) em.createQuery("FROM User").getResultList();
     }
+
+    @Override
+    public User getUserByName(String name) {
+        return (User) em.createQuery("SELECT u FROM User u WHERE u.name = :name");
+    }
 }
