@@ -18,8 +18,15 @@
         <p><label for="mail">mail</label></p>
         <p><input type="text" id="mail" name="mail" required></p>
         <p><input type="submit" value="add user"></p>
+
+
     </form>
     <a th:href="@{/admin}">Return</a>
+    <p>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="logout"/>
+    </form>
+    </p>
 </div>
 </body>
 </html>

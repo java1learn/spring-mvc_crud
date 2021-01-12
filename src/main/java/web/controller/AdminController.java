@@ -22,7 +22,7 @@ public class AdminController {
     public String printUsers(Model model) {
         List<User> userList = userService.userList();
         model.addAttribute("users", userList);
-        return "admin";
+        return "users";
     }
 
     @GetMapping("/addUser")
@@ -35,7 +35,7 @@ public class AdminController {
     @PostMapping("/addUser")
     public String addUser(@ModelAttribute("user") User user) {
         userService.add(user);
-        return "redirect:/admin";
+        return "users";
     }
 
     @GetMapping("/edit/{id}")
@@ -47,13 +47,13 @@ public class AdminController {
     @PostMapping("/edit")
     public String editUser(@ModelAttribute("user") User user) {
         userService.edit(user);
-        return "redirect:/admin";
+        return "users";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") long id){
         userService.delete(userService.getById(id));
-        return "redirect:/admin";
+        return "users";
     }
 
 }
