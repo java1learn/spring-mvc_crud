@@ -11,7 +11,7 @@
 <div align="center">
 
     <div align="center">
-        <a th:href="@{/addUser}">Add User</a>
+        <a th:href="@{/admin/addUser}">Add User</a>
     </div>
 
     <table border="1" align="center">
@@ -22,6 +22,8 @@
             <th>lastName</th>
             <th>department</th>
             <th>mail</th>
+            <th>password</th>
+            <th>role</th>
             <th>action</th>
         </tr>
 
@@ -31,13 +33,19 @@
         <td th:text="${user.lastName}">LastName</td>
         <td th:text="${user.department}">Department</td>
         <td th:text="${user.mail}">Mail</td>
+        <td th:text="${user.password}">Password</td>
+            <td th:each="role: ${user.getRoles()}" th:text="${role.getRoleName()}">role</td>
         <td>
-            <a th:href="@{'/edit/' + ${user.id}}">edit</a>
-            <a th:href="@{'/delete/' + ${user.id}}">delete</a>
+            <a th:href="@{'admin/edit/' + ${user.id}}">edit</a>
+            <a th:href="@{'admin/delete/' + ${user.id}}">delete</a>
         </td>
     </tr>
 
     </table>
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="logout"/>
+    </form>
 
 </div>
 
