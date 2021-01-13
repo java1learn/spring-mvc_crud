@@ -1,13 +1,16 @@
 package web.dao;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 @Repository
+@Transactional
 public class UserDaoImpl implements UserDao {
 
     @PersistenceContext
@@ -41,6 +44,14 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getUserByName(String name) {
-        return (User) em.createQuery("SELECT u FROM User u WHERE u.name = :name");
+        User user = null;
+        Query query = em.createQuery("SELECT u FROM User u WHERE u.login=:username");
+        query.setParameter("username", name);
+        try {
+            user = (User) query.getSingleResult();
+        } catch (Exception e) {
+            // Handle exception
+        }
+        return user;
     }
 }

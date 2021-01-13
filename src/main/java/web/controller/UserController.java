@@ -1,9 +1,14 @@
 package web.controller;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import web.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +16,8 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/")
 public class UserController {
+
+    private UserService userService;
 
     @GetMapping(value = "/")
     public String printWelcome(ModelMap model) {
@@ -23,12 +30,14 @@ public class UserController {
     }
 
     @GetMapping(value = "/login")
-    public String getLoginPage(){
+    public String getLoginPage() {
         return "login";
     }
 
     @GetMapping(value = "/user")
-    public String getUserPage(){
+    public String getUserPage(Model model) {
+        model.addAttribute("user", userService.getByName(SecurityContextHolder
+                .getContext().getAuthentication().getName()));
         return "user";
     }
 }

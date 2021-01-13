@@ -15,14 +15,15 @@ public class Role implements GrantedAuthority {
     @Column(name = "roleName")
     private String roleName;
 
-    @ManyToMany(mappedBy = "roles")
+    @Transient
+    @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
     private List<User> users;
 
     public Role(){}
 
-    public Role(Long id, String roleName) {
-        this.id = id;
+    public Role(String roleName, List<User> users) {
         this.roleName = roleName;
+        this.users = users;
     }
 
     public List<User> getUsers() {
@@ -52,5 +53,12 @@ public class Role implements GrantedAuthority {
     @Override
     public String getAuthority() {
         return roleName;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "roleName='" + roleName + '\'' +
+                '}';
     }
 }

@@ -20,11 +20,6 @@
         <p><label for="mail">password</label></p>
         <p><input type="text" th:field="*{password}" id="password" value="mail" required></p>
         <p><input type="submit" value="edit"></p>
-        <p>
-            <label>Role:</label><br>
-            <input type="checkbox" name="roleAdmin" value="ROLE_ADMIN">admin<br>
-            <input type="checkbox" name="roleUser" value="ROLE_USER">user<br>
-        </p>
     </form>
     <a th:href="@{/admin}">Return</a>
 

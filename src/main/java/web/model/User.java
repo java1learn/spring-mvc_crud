@@ -15,8 +15,8 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", unique = true)
-    private String name;
+    @Column(name = "login", unique = true)
+    private String login;
 
     @Column(name = "lastName")
     private String lastName;
@@ -30,7 +30,7 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
@@ -41,8 +41,8 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String name, String lastName, String department, String mail, String password, Set<Role> roles) {
-        this.name = name;
+    public User(String login, String lastName, String department, String mail, String password, Set<Role> roles) {
+        this.login = login;
         this.lastName = lastName;
         this.department = department;
         this.mail = mail;
@@ -66,12 +66,12 @@ public class User implements UserDetails {
         this.mail = mail;
     }
 
-    public String getName() {
-        return name;
+    public String getLogin() {
+        return login;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLogin(String name) {
+        this.login = name;
     }
 
     public String getLastName() {
@@ -106,7 +106,7 @@ public class User implements UserDetails {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + login + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", department='" + department + '\'' +
                 ", mail='" + mail + '\'' +
@@ -127,7 +127,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return name;
+        return login;
     }
 
     @Override
