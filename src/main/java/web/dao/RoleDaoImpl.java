@@ -42,6 +42,6 @@ public class RoleDaoImpl implements RoleDao {
 
     @Override
     public Role findRoleByName(String name) {
-        return (Role) em.createQuery("SELECT r FROM Role r WHERE r.roleName = :name");
+        return (Role) em.createQuery("FROM Role WHERE roleName = :name");
     }
 }

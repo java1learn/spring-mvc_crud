@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import web.model.User;
 import web.service.UserService;
 
 import java.util.ArrayList;
@@ -36,8 +37,16 @@ public class UserController {
 
     @GetMapping(value = "/user")
     public String getUserPage(Model model) {
-        model.addAttribute("user", userService.getByName(SecurityContextHolder
-                .getContext().getAuthentication().getName()));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        model.addAttribute("mail", user.getMail());
+        model.addAttribute("id", user.getId());
+        model.addAttribute("password", user.getPassword());
+        model.addAttribute("lastName",user.getLastName());
+        model.addAttribute("department",user.getDepartment());
+        model.addAttribute("login", user.getUsername());
+        model.addAttribute("roles", user.getAuthorities());
         return "user";
     }
+
 }

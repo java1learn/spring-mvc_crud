@@ -1,12 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Hello user</title>
 </head>
 <body>
-<div>
-    <p>Hello User, this Spring Security example</p>
+<div align="center">
+
+    <table border="1">
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>lastName</th>
+            <th>department</th>
+            <th>mail</th>
+            <th>password</th>
+            <th>roles</th>
+        </tr>
+
+        <tr>
+            <td th:utext="${id}">id</td>
+            <td th:utext="${login}">Name</td>
+            <td th:utext="${lastName}">LastName</td>
+            <td th:utext="${department}">Department</td>
+            <td th:utext="${mail}">Mail</td>
+            <td th:utext="${password}">Password</td>
+            <td th:utext="${roles}">roles</td>
+        </tr>
+    </table>
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="logout"/>
+    </form>
 </div>
 </body>
 </html>

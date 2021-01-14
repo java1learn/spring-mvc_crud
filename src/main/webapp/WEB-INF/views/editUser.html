@@ -9,8 +9,8 @@
 <div align="center">
     <form th:action="@{/admin/edit}" th:object="${user}" method="post">
         <p><input type="hidden" th:field="*{id}"/></p>
-        <p><label for="name">name</label></p>
-        <p><input type="text" th:field="*{name}" id="name" value="name" required></p>
+        <p><label for="login">login</label></p>
+        <p><input type="text" th:field="*{login}" id="login" value="login" required></p>
         <p><label for="lastName">lastName</label></p>
         <p><input type="text" th:field="*{lastName}" id="lastName" value="lastName" required></p>
         <p><label for="department">department</label></p>
@@ -19,9 +19,18 @@
         <p><input type="text" th:field="*{mail}" id="mail" value="mail" required></p>
         <p><label for="mail">password</label></p>
         <p><input type="text" th:field="*{password}" id="password" value="mail" required></p>
+        <ul>
+            <li th:each="role : ${rolelist}">
+                <input type="checkbox" name="roles" th:field="*{roles}" th:value="${role}"
+                       th:text="${role.getRoleName}" />
+            </li>
+        </ul>
+
         <p><input type="submit" value="edit"></p>
     </form>
-    <a th:href="@{/admin}">Return</a>
+    <form th:action="@{/admin}" method="get">
+        <input type="submit" value="Return"/>
+    </form>
 
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="logout"/>

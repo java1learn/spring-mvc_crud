@@ -9,8 +9,8 @@
 <body>
 <div align="center">
     <form th:action="@{admin/addUser}" th:object="${user}" th:method="post">
-        <p><label for="name">name</label></p>
-        <p><input type="text" id="name" name="name" required></p>
+        <p><label for="login">login</label></p>
+        <p><input type="text" id="login" name="login" required></p>
         <p><label for="lastName">lastName</label></p>
         <p><input type="text" id="lastName" name="lastName" required></p>
         <p><label for="department">department</label></p>
@@ -19,11 +19,14 @@
         <p><input type="text" id="mail" name="mail" required></p>
         <p><label for="password">password</label></p>
         <p><input type="text" id="password" name="password" required></p>
+
         <p><input type="submit" value="add user"></p>
 
 
     </form>
-    <a th:href="@{/admin}">Return</a>
+    <form th:action="@{/admin}" method="get">
+        <input type="submit" value="Return"/>
+    </form>
 
     <p>
     <form th:action="@{/logout}" method="post">

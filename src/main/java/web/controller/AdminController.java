@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import web.dao.RoleDao;
 import web.model.Role;
 import web.model.User;
 import web.service.RoleService;
@@ -18,6 +19,7 @@ import java.util.Set;
 @RequestMapping("/admin")
 public class AdminController {
     private UserService userService;
+    private RoleDao roleDao;
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -34,12 +36,14 @@ public class AdminController {
     @GetMapping("/addUser")
     public String addUser(Model model) {
         User user = new User();
+
         model.addAttribute("user", user);
         return "addUser";
     }
 
     @PostMapping("admin/addUser")
     public String addUser(@ModelAttribute("user") User user) {
+
         userService.add(user);
         return "redirect:/admin/";
     }
@@ -50,18 +54,11 @@ public class AdminController {
         return "editUser";
     }
 
-    @PostMapping("/admin/edit")
+    @PostMapping("/edit")
     public String editUser(@ModelAttribute("user") User user) {
         userService.edit(user);
         return "redirect:/admin/";
     }
-
-//    @PostMapping("/edit")
-//    public String editUser(@ModelAttribute("user") User user, @PathVariable("userId") Long id) {
-//        User dbUser = userService.getById(id);
-//        userService.edit(user);
-//        return "redirect:/admin/";
-//    }
 
 
     @GetMapping("/delete/{id}")
